@@ -1,6 +1,6 @@
 {
   "name": "hudl-relay-cache-manager",
-  "version": "0.1.3-beta.1",
+  "version": "0.1.3-beta.2",
   "description": "An implementation of the RelayCacheManager for local data caching in Relay",
   "main": "dist.js",
   "scripts": {

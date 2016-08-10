@@ -109,10 +109,12 @@ class CacheWriter {
 
 export default class RelayCacheManager {
   constructor(cacheKey = CACHE_KEY) {
-    this.cacheWriter = new CacheWriter(cacheKey);
+    this.cacheKey = cacheKey;
+    this.cacheWriter = new CacheWriter(this.cacheKey);
   }
   clear() {
-    localStorage.removeItem(CACHE_KEY);
+    localStorage.removeItem(this.cacheKey);
+    this.cacheWriter = new CacheWriter(this.cacheKey);
   };
 
   getMutationWriter() {
