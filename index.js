@@ -54,9 +54,10 @@ class CacheRecordStore {
  *  to manage the CacheRecord instances
  */
 class CacheWriter {
-  constructor() {
+  constructor(cacheKey) {
+    this.cacheKey = cacheKey;
     try {
-      let localCache = localStorage.getItem(CACHE_KEY);
+      let localCache = localStorage.getItem(this.cacheKey);
       if (localCache) {
         localCache = JSON.parse(localCache);
         this.cache = CacheRecordStore.fromJSON(localCache);
@@ -80,7 +81,7 @@ class CacheWriter {
     this.cache.records[dataId] = record;
     try {
       const serialized = JSON.stringify(this.cache);
-      localStorage.setItem(CACHE_KEY, serialized);
+      localStorage.setItem(this.cacheKey, serialized);
     } catch (err) {
       /* noop */
     }
@@ -107,8 +108,8 @@ class CacheWriter {
 }
 
 export default class RelayCacheManager {
-  constructor() {
-    this.cacheWriter = new CacheWriter();
+  constructor(cacheKey = CACHE_KEY) {
+    this.cacheWriter = new CacheWriter(cacheKey);
   }
   clear() {
     localStorage.removeItem(CACHE_KEY);
