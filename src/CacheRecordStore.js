@@ -71,7 +71,7 @@ export default class CacheRecordStore {
     identifyingArgValue: string,
     dataId: string
   ) {
-    this.rootCallMap[storageKey] = dataId;
+    this.rootCallMap[storageKey + identifyingArgValue] = dataId;
   }
 
   writeRecord(
@@ -85,7 +85,7 @@ export default class CacheRecordStore {
     callName: string,
     callValue: string
   ): ?string {
-    return this.rootCallMap[callName];
+    return this.rootCallMap[callName + callValue];
   }
 
   readNode(dataID: string): ?CacheRecord {

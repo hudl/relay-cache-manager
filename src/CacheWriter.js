@@ -74,7 +74,7 @@ export default class CacheWriter {
     identifyingArgValue: string,
     dataId: string
   ) {
-    this.cache.rootCallMap[storageKey] = dataId;
+    this.cache.writeRootCall(storageKey, identifyingArgValue, dataId);
   }
 
   readRootCall(
@@ -82,7 +82,7 @@ export default class CacheWriter {
     callValue: string,
     callback: (error: any, value: any) => void
   ) {
-    const dataId = this.cache.rootCallMap[callName];
+    const dataId = this.cache.getDataIdFromRootCallName(callName, callValue);
     setImmediate(callback.bind(null, null, dataId));
   }
 
